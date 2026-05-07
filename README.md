@@ -34,6 +34,35 @@ streamlit run demo01_text.py
 
 預設網址 `http://localhost:8501`。停止：`Ctrl+C`。
 
+## stopstreamlit.ps1
+
+PowerShell 輔助函式，用來終止佔用 Streamlit 連接埠（預設 8501）的殘留行程。當前一個 `streamlit run` 沒有正常結束、或同一連接埠被卡住而導致新 app 無法啟動時使用。
+
+### 用途
+
+定義 `Stop-Streamlit` 函式：查 `Get-NetTCPConnection` 取得指定 port 的 OwningProcess，再用 `taskkill /T /F` 連同子行程一併殺掉。
+
+### 安裝（載入到 PowerShell profile）
+
+把 `stopstreamlit.ps1` 內容貼進 PowerShell profile（`$PROFILE`），讓每個新開的 PowerShell session 自動載入：
+
+```powershell
+# 開啟 profile（不存在會建立）
+if (-not (Test-Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force }
+notepad $PROFILE
+```
+
+將 `stopstreamlit.ps1` 整段函式內容貼到 profile 後存檔，重開 PowerShell 或執行 `. $PROFILE` 重新載入。
+
+### 使用
+
+```powershell
+Stop-Streamlit            # 預設殺 port 8501
+Stop-Streamlit -Port 8502 # 指定其他 port
+```
+
+無對應行程時印出 `No process listening on port <Port>`。
+
 ## Demo Index
 
 | 檔案 | 主題 | 主要 API |
