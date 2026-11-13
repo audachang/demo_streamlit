@@ -8,13 +8,24 @@ mark = st.select_slider('Pick a mark', ['Bad', 'Good', 'Excellent'])
 number = st.slider('Pick a number', 0, 50)
 
 
+imgdict = {
+    'Doraemon': "frieren+doraemon.png",
+    'Baki': "frieren+baki.png"
+}
+captiondict = {
+    'Doraemon': "Frieren Dancing with Doraemon",
+    'Baki': "Frieren Dancing with Baki"
+}
+
 st.write(f"id: {id}")
 st.write(f"fruit: {fruit}")
 st.write(f"planets: {planets}")
 st.write(f"mark: {mark}")
 st.write(f"number: {number}")   
 
-if id == 'Doraemon':
-    st.image("frieren+doraemon.png", caption="Frieren Dancing with Doraemon")
-elif id == 'Baki':
-    st.image("frieren+baki.png", caption="Frieren Dancing with Baki")
+# if id == 'Doraemon':
+#     st.image("frieren+doraemon.png", caption="Frieren Dancing with Doraemon")
+# elif id == 'Baki':
+#     st.image("frieren+baki.png", caption="Frieren Dancing with Baki")
+
+st.image(imgdict[id], caption=captiondict[id])
